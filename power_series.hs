@@ -1,3 +1,15 @@
+module PowerSeries
+( Series
+, coeffs
+, series
+, diff
+, int
+, evalAt
+, expx
+, sinx
+, cosx
+) where
+
 -- A series is just a list of things
 newtype Series a = S { coeffs :: [a] } deriving (Eq, Show)
 
