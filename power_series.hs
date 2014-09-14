@@ -1,13 +1,10 @@
 module PowerSeries
-( Series
-, coeffs
-, series
-, diff
-, int
-, evalAt
-, expx
-, sinx
-, cosx
+(
+  Series, coeffs, series,
+  diff, int,
+  evalAt,
+  expx, sinx, cosx,
+  expSeries, expCoeffs
 ) where
 
 -- A series is just a list of things
@@ -100,5 +97,10 @@ expx = int expx 1
 sinx = int cosx 0
 cosx = - int sinx (-1)
 
--- TODO implement extraction of coeffients from exp. generating functions
+expSeries :: (Fractional a) => [a] -> Series a
+expSeries xs = S $ zipWith (*) xs $ coeffs expx
+
+expCoeffs :: (Fractional a) => Series a -> [a]
+expCoeffs xs = zipWith (/) (coeffs xs) (coeffs expx)
+
 -- TODO maybe do something about dirichlet convolution?
